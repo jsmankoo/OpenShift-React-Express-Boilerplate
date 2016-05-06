@@ -1,23 +1,43 @@
-const express = require('express');
-const morgan = require('morgan');
+const express = require(`express`);
+const morgan = require(`morgan`);
+const webpack = require(`webpack`);
+const WebpackDevServer = require(`webpack-dev-server`);
+const config = require(`./webpack.dev`);
 
-let app = express();
+// Webpack Dev Server for Hot module reloading
+// Comment it out during production
+new WebpackDevServer(webpack(config), {
+  publicPath: config.output.publicPath,
+  hot: true,
+  historyApiFallback: true,
+  stats: {colors: true}
+}).listen(3001, `localhost`, function (err, result) {
+  if (err) {
+    return console.log(err);
+  }
 
-app.set('port', process.env.NODE_PORT || 3000);
-app.set('ip', process.env.NODE_IP || 'localhost');
-
-app.set('views', './views');
-app.set('view engine', 'pug');
-
-app.use(morgan('combined'));
-app.use(express.static('./public'));
-
-app.get('/', (req, res)=>{
-  res.render('index');
+  console.log(`Listening at http://localhost:3001/`);
 });
 
-app.listen(app.get('port'), app.get('ip'), ()=>{
-  console.log(`Application ip ${app.get('ip')}:${app.get('port')}`);
+
+// Init express
+let app = express();
+
+app.set(`port`, process.env.NODE_PORT || 3000);
+app.set(`ip`, process.env.NODE_IP || `localhost`);
+
+app.set(`views`, `./views`);
+app.set(`view engine`, `pug`);
+
+app.use(morgan(`combined`));
+app.use(express.static(`./public`));
+
+app.get(`/`, (req, res)=>{
+  res.render(`index`);
+});
+
+app.listen(app.get(`port`), app.get(`ip`), ()=>{
+  console.log(`Application ip ${app.get(`ip`)}:${app.get(`port`)}`);
   console.log(`worker ${process.pid} started...`);
 });
 
