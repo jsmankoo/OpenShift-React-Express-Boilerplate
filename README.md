@@ -18,6 +18,10 @@ app.js
 ```javascript
 // Webpack Dev Server for Hot module reloading
 // Comment it out during production
+const webpack = require(`webpack`);
+const WebpackDevServer = require(`webpack-dev-server`);
+const config = require(`./webpack.dev`);
+
 new WebpackDevServer(webpack(config), {
   publicPath: config.output.publicPath,
   hot: true,
