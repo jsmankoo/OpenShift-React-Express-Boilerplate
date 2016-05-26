@@ -7,7 +7,7 @@ const App = React.createClass({
   render(){
     return (
       <div className='App'>
-        App!!
+        App
       </div>
     );
   }

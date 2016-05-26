@@ -1,17 +1,17 @@
-var path = require(`path`);
-var webpack = require(`webpack`);
+var path = require('path');
+var webpack = require('webpack');
 
 module.exports = {
-  devtool: `eval-source-map`,
+  devtool: 'eval',
   entry: [
-    `webpack-dev-server/client?http://0.0.0.0:3001`, // WebpackDevServer host and port
-    `webpack/hot/only-dev-server`, // "only" prevents reload on syntax errors
-    `./src/Client`
+    'webpack-dev-server/client?http://localhost:3001',
+    'webpack/hot/only-dev-server',
+    './src/Client.js'
   ],
   output: {
-    path: path.join(__dirname, `public/js`),
-    filename: `bundle.js`,
-    publicPath: `/js/`
+    path: path.join(__dirname, 'dist'),
+    filename: 'bundle.js',
+    publicPath: '/js/'
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin()
@@ -19,8 +19,8 @@ module.exports = {
   module: {
     loaders: [{
       test: /\.js$/,
-      loaders: [`react-hot`, `babel`],
-      include: path.join(__dirname, `src`)
+      loaders: ['react-hot', 'babel'],
+      include: path.join(__dirname, 'src')
     }]
   }
 };

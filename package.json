@@ -8,7 +8,7 @@
     "start": "node --use_strict start.js",
     "compile": "webpack --config webpack.config.js"
   },
-  "author": "Ionut-Cristian Florescu <ionut.florescu@gmail.com>",
+  "author": "Jai S. Mankoo <jsmankoo@outlook.com>",
   "license": "ISC",
   "devDependencies": {
     "babel-eslint": "^6.0.4",
